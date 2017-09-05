@@ -1,4 +1,20 @@
-"use strict";
+* Write More Organizable Actions and Reducers with Less Code
+This package allows you to create Actions and Reducers with 
+objects like ~{type: function}~ and ~{type: {status: function}}~.
+
+* Feature
+ 1. Promise-like Async Actions:  Dispatch Async Actions with Status Change.
+ 2. Declarative Reducers and Actions: As easy as Redux-act/Redux-actions
+      for Synchronic operations.
+
+* Simple Usage with An Async Counter Example
+
+Following we create a redux store representing a counter with async actions.
+In this counter, ~add~ action is always synchronic. ~sub~ action is
+synchronic when ~action.status !== 'pending'~, and is asynchronous
+when ~action.status === 'pending'~. 
+
+#+BEGIN_SRC javascript
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { wrapReducers, wrapActions } from "redux-declare";
@@ -9,13 +25,17 @@ let nestedReducers = {
     count: state.count + action.count
   }),
   sub: {
+    // Activated when sub action is pending and state.paused is true
     success: (state, action) => ({
       count: state.count - action.count
     }),
+    // Activated when sub action is pending and state.paused is true
     error: (state, action) => ({
       count: state.count + 0.01
     })
   },
+  // state.paused controls whether sub async action 
+  // would render a success result or an error result
   pause: (state, action) => ({
     paused: action.paused || !state.paused
   })
@@ -25,6 +45,8 @@ let nestedActions = {
   sub: {
     pending: payload => (dispatch, getState) => {
       setTimeout(() => {
+      // If state.paused is false, async dispatch sub action with success
+      // status; otherwise, async dispatch sub action with error status.
         if (!getState().paused) {
           dispatch({
             type: "sub",
@@ -47,17 +69,23 @@ let store = createStore(
   { count: 0, paused: false },
   applyMiddleware(thunk)
 );
+#+END_SRC
+
+Then we could examine the synchronic and asynchronous actions and reducers 
+by the code below
+
+#+BEGIN_SRC javascript
 
 let { add, sub, pause } = actionCreators;
 
-// Test Async Actions
+// Test Sync Actions
 store.dispatch(add({ count: 9 }));
 assert(store.getState().count === 9);
 
 store.dispatch(sub("success", { count: 9 }));
 assert(store.getState().count === 0);
 
-// Test Delayed Actions
+// Test Async Actions
 store.dispatch(sub("pending", { count: 9, delay: 1 }));
 setTimeout(() => {
   assert(store.getState().count === -9);
@@ -71,5 +99,17 @@ setTimeout(() => {
     assert(store.getState().count === -8.99);
   }, 100);
 }, 100);
+#+END_SRC
 
-// console.log('Finished')
+* More Document 
+The Readme is already long enough.  For more explanation of the package, 
+please see the document below.
+
+TODO Gitbook document
+* FAQ
+Please submit issues and therefore I can fill in this section.
+
+* Maybe In the Plan:
+  - [ ] Support FSA by appending rules of generating reducers and actions
+  - [ ] ~BindAll~ and ~assignTo~ like in the `redux-act`
+  - [ ] ~autoFix~ as an Object 
