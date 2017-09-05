@@ -1,7 +1,7 @@
 {
   "name": "redux-declare",
   "version": "1.0.0",
-  "description": "boilerplate for redux async actions and reducers",
+  "description": "Reduce Boilerplate for Redux Async Actions and Reducers",
   "main": "src/index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register test/index.js"
@@ -9,6 +9,10 @@
   "keywords": [
     "Redux"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:zhujinxuan/redux-declare.git"
+  },
   "author": "Jinxuan Zhu",
   "license": "MIT",
   "devDependencies": {
