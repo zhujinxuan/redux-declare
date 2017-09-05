@@ -1,0 +1,25 @@
+{
+  "name": "redux-declare",
+  "version": "1.0.0",
+  "description": "boilerplate for redux async actions and reducers",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register test/index.js"
+  },
+  "keywords": [
+    "Redux"
+  ],
+  "author": "Jinxuan Zhu",
+  "license": "MIT",
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "axios": "^0.16.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "better-assert": "^1.0.2",
+    "mocha": "^3.5.0",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  }
+}
