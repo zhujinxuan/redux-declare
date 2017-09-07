@@ -1,7 +1,7 @@
 # API Reference for `wrapActions`
 
 * [Methods](#methods)
-  * [wrapReducers](/doc/APU/wrapReducers.md)
+  * [wrapReducers](/doc/API/wrapReducers.md)
   * [wrapActions](#wrapActions)
 
 ### wrapActions

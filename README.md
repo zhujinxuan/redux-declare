@@ -14,7 +14,7 @@ This package `redux-declare` allows you to create Actions and Reducers with obje
   * [`wrapReducers`](https://zhujinxuan.github.io/redux-declare/doc/API/wrapReducers.html)
   * [`wrapActions`](https://zhujinxuan.github.io/redux-declare/doc/API/wrapActions.html)
 
-# An Sync Counter Example
+# A Sync Counter Example
 
 Following is an redux store reprsenting a counter with sync actions (sub
 and add).

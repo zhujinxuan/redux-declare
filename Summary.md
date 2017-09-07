@@ -1,4 +1,3 @@
-# Table of content 
 
 * [Motivation](doc/Motivation.md)
 * [Methods](doc/API/README.md)
