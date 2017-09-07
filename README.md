@@ -8,6 +8,14 @@ This package `redux-declare` allows you to create Actions and Reducers with obje
 1.  Promise-like Async Actions: Dispatch Async Actions with Status Change.
 2.  Declarative Reducers and Actions: As easy as Redux-act/Redux-actions for Synchronic operations.
 
+# Install 
+
+Just like other packages by npm:
+
+```bash
+npm i --save-dev redux-declare
+```
+
 # Document
 * [Motivation](https://zhujinxuan.github.io/redux-declare/doc/Motivation.html)
 * [Methods](https://zhujinxuan.github.io/redux-declare/doc/API/)
