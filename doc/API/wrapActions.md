@@ -1,10 +1,11 @@
 # API Reference for `wrapActions`
 
 * [Methods](#methods)
-  * [wrapReducers](#wrapReducers)
+  * [wrapReducers](/doc/APU/wrapReducers.md)
   * [wrapActions](#wrapActions)
 
 ## Methods
+### [wrapReducers](/doc/APU/wrapReducers.md)
 ### wrapActions
 
 ```js

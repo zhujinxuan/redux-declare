@@ -2,5 +2,5 @@
 
 * [Motivation](doc/Motivation.md)
 * [Methods](doc/API/README.md)
-  * [wrapReducers](doc/API/wrapActions.md)
-  * [wrapActions](doc/API/wrapReducers.md)
+  * [wrapReducers](doc/API/wrapReducers.md)
+  * [wrapActions](doc/API/wrapActions.md)

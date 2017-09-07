@@ -1,6 +1,6 @@
 # Write More Organizable Actions and Reducers with Less Code
 
-This package allows you to create Actions and Reducers with objects like
+This package `redux-declare` allows you to create Actions and Reducers with objects like
 `{type: function}` and `{type: {status: function}}`.
 
 # Feature
@@ -9,8 +9,10 @@ This package allows you to create Actions and Reducers with objects like
 2.  Declarative Reducers and Actions: As easy as Redux-act/Redux-actions for Synchronic operations.
 
 # Document
-
-TODO
+* [Motivation](https://zhujinxuan.github.io/redux-declare/doc/Motivation.html)
+* [Methods](https://zhujinxuan.github.io/redux-declare/doc/API/)
+  * [`wrapReducers`](https://zhujinxuan.github.io/redux-declare/doc/API/wrapReducers.html)
+  * [`wrapActions`](https://zhujinxuan.github.io/redux-declare/doc/API/wrapActions.html)
 
 # An Sync Counter Example
 
@@ -142,9 +144,7 @@ Maybe In the Plan:
 ==================
 
 -   [ ] Webpack bundle compile
--   [ ]
 -   [ ] Compose Dispatch for avoid retype action.type
--   [ ] Support FSA by appending rules of generating reducers and actions
--   [ ] and like in the \`redux-act\`
--   [ ] as an Object
+-   [ ] Support FSA by appending rules
+-   [ ] `BindAll` like in the \`redux-act\`
 

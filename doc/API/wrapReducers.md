@@ -2,7 +2,7 @@
 
 * [Methods](#methods)
   * [wrapReducers](#wrapReducers)
-  * [wrapActions](#wrapActions)
+  * [wrapActions](/doc/API/wrapActions.md)
 
 ## Methods
 

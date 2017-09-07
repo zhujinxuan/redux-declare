@@ -8,4 +8,4 @@ cd _book && git init
 git commit --allow-empty -m 'update book' 
 git checkout -b gh-pages && touch .nojekyll 
 git add . && git commit -am 'update book' 
-git push origin gh-pages --force
+git push git@github.com:zhujinxuan/redux-declare gh-pages --force
