@@ -5,7 +5,6 @@
   * [wrapActions](/doc/API/wrapActions.md)
 
 ## Methods
-
 ### wrapReducers
 
 ```js

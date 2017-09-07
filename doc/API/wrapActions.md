@@ -4,8 +4,6 @@
   * [wrapReducers](/doc/APU/wrapReducers.md)
   * [wrapActions](#wrapActions)
 
-## Methods
-### [wrapReducers](/doc/APU/wrapReducers.md)
 ### wrapActions
 
 ```js
