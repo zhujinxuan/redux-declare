@@ -1,7 +1,7 @@
 # Write More Organizable Actions and Reducers with Less Code
 
 This package allows you to create Actions and Reducers with objects like
-`type.action` and `type.status`.
+`{type: function}` and `{type: {status: function}}`.
 
 # Feature
 

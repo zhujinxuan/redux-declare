@@ -1,0 +1,21 @@
+{
+  "gitbook": ">= 3.0.0",
+  "title": "redux-declare",
+  "plugins": ["prism", "-highlight", "github", "anchorjs"],
+  "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/zhujinxuan/redux-declare"
+    },
+    "sharing": {
+      "facebook": true,
+      "twitter": true,
+      "google": false,
+      "weibo": false,
+      "instapaper": false,
+      "vk": false
+    }
+  },
+  "structure": { 
+    "summary": "Summary.md"
+  } 
+}

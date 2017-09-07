@@ -4,16 +4,22 @@
   "description": "Reduce Boilerplate for Redux Async Actions and Reducers",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register test/index.js"
+    "test": "mocha --compilers js:babel-core/register test/index.js",
+    "docs:clean": "rimraf _book",
+    "docs:prepare": "gitbook install",
+    "docs:build": "npm run docs:prepare && gitbook build -g zhujinxuan/redux-declare",
+    "docs:watch": "npm run docs:prepare && gitbook serve",
+    "docs:publish": "bash publish.sh"
   },
   "keywords": [
-    "Redux"
+    "Redux",
+    "actions"
   ],
   "repository": {
     "type": "git",
     "url": "git@github.com:zhujinxuan/redux-declare.git"
   },
-  "author": "Jinxuan Zhu",
+  "author": "Jinxuan Zhu <zhujinxuan@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "assert": "^1.4.1",
@@ -25,6 +31,7 @@
     "better-assert": "^1.0.2",
     "mocha": "^3.5.0",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "rimraf": "^2.6.1"
   }
 }
