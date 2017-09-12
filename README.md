@@ -13,7 +13,7 @@ This package `redux-declare` allows you to create Actions and Reducers with obje
 Just like other packages by npm:
 
 ```bash
-npm i --save-dev redux-declare
+npm i --save redux-declare
 ```
 
 # Document

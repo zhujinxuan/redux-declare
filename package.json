@@ -1,6 +1,6 @@
 {
   "name": "redux-declare",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Reduce Boilerplate for Redux Async Actions and Reducers",
   "main": "src/index.js",
   "scripts": {
