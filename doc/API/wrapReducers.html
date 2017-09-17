@@ -1,0 +1,385 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>wrapReducers · redux-declare</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="wrapActions.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Motivation.html">
+            
+                <a href="../Motivation.html">
+            
+                    
+                    Motivation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Methods
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1" data-path="wrapReducers.html">
+            
+                <a href="wrapReducers.html">
+            
+                    
+                    wrapReducers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="wrapActions.html">
+            
+                <a href="wrapActions.html">
+            
+                    
+                    wrapActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >wrapReducers</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="api-reference-for-wrapreducers">API Reference for <code>wrapReducers</code></h1>
+<ul>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#wrapReducers">wrapReducers</a></li>
+<li><a href="wrapActions.html">wrapActions</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<h3 id="wrapreducers">wrapReducers</h3>
+<pre class="language-"><code class="lang-js"><span class="token function">wrapReducers</span><span class="token punctuation">(</span>
+  nestedReducers<span class="token punctuation">,</span>
+  options <span class="token operator">=</span> defaultOptions
+<span class="token punctuation">)</span>
+</code></pre>
+<p>wrap a reducer from an object with <code>{action.type: function}</code> or <code>{action.type: {action.status: function}}</code>, therefore renders would render state change 
+wisely by the accepted <code>action.type</code> and <code>action.status</code>.</p>
+<h4 id="wrapreducerstype-function"><code>wrapReducers({type: function})</code></h4>
+<p><code>wrapReducer</code> creates Redux reducer by <code>action.type</code>;</p>
+<h5 id="example">Example</h5>
+<p>The following code block</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> reducer <span class="token operator">=</span> <span class="token function">wrapReducers</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">+</span> action<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">-</span> action<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>is an equivalence to</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> reducer <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">switch</span><span class="token punctuation">(</span>action<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token string">&apos;add&apos;</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token operator">...</span>state<span class="token punctuation">,</span> count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count<span class="token operator">+</span> action<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token string">&apos;sub&apos;</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token operator">...</span>state<span class="token punctuation">,</span> count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count<span class="token operator">-</span> action<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">default</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> state<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="wrapredcerstype-status-function"><code>wrapRedcers({type: {status: function}})</code></h4>
+<p><code>wrapReducers</code> creates Redux reducers by <code>action.type</code> and by <code>action.status</code>, and <code>wrapReducers</code> automatically merges reducer rules with and without <code>action.status</code>.</p>
+<h5 id="example">Example</h5>
+<p>The following code block </p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> reducer <span class="token operator">=</span> <span class="token function">wrapReducers</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">+</span> action<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    success<span class="token punctuation">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count<span class="token operator">-</span> action<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">;</span>
+    error<span class="token punctuation">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>count<span class="token punctuation">:</span> <span class="token number">999</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>is an equivalence to </p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> reducer <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">switch</span><span class="token punctuation">(</span>action<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token string">&apos;add&apos;</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token operator">...</span>state<span class="token punctuation">,</span> count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count<span class="token operator">+</span> action<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token string">&apos;sub&apos;</span><span class="token punctuation">:</span>
+      <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token string">&apos;success&apos;</span><span class="token punctuation">:</span> 
+          <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token operator">...</span>state<span class="token punctuation">,</span> count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">-</span> action<span class="token punctuation">:</span>count<span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token string">&apos;error&apos;</span><span class="token punctuation">:</span> 
+          <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token operator">...</span>state<span class="token punctuation">,</span> count<span class="token punctuation">:</span> <span class="token number">999</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token punctuation">:</span>
+          <span class="token keyword">return</span> state<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">default</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> state<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="wrapreducersnestedreducers-options"><code>wrapReducers(nestedReducers, options)</code></h4>
+<p>Some addtional configuration is provided by <code>options</code>.  </p>
+<ol>
+<li><p><code>options.statusKey</code>, by default<code>&apos;status&apos;</code>
+This option determines where to search the <code>status</code> in the dispatched <code>action</code>.<br>If we set <code>options.statusKey = &apos;cat&apos;</code>, in all example above, the <code>action.status</code> will be replaced by <code>action.cat</code>.</p>
+</li>
+<li><p><code>options.defaultState</code>, by default <code>{}</code>
+This option determines the default Redux State set by the reducer;</p>
+</li>
+<li><p><code>options.autoFixState</code>, by default <code>true</code>
+This options determines whether reducers would add <code>{...state}</code> in the state change.  If false, all <code>...state</code> in the exmaples above will be deleted.</p>
+</li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Methods">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="wrapActions.html" class="navigation navigation-next " aria-label="Next page: wrapActions">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"wrapReducers","level":"1.3.1","depth":2,"next":{"title":"wrapActions","level":"1.3.2","depth":2,"path":"doc/API/wrapActions.md","ref":"doc/API/wrapActions.md","articles":[]},"previous":{"title":"Methods","level":"1.3","depth":1,"path":"doc/API/README.md","ref":"doc/API/README.md","articles":[{"title":"wrapReducers","level":"1.3.1","depth":2,"path":"doc/API/wrapReducers.md","ref":"doc/API/wrapReducers.md","articles":[]},{"title":"wrapActions","level":"1.3.2","depth":2,"path":"doc/API/wrapActions.md","ref":"doc/API/wrapActions.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","github","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/zhujinxuan/redux-declare"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"prism":{},"anchorjs":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"Summary.md"},"variables":{},"title":"redux-declare","gitbook":">= 3.0.0"},"file":{"path":"doc/API/wrapReducers.md","mtime":"2017-09-07T01:59:27.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-09-17T05:25:40.238Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

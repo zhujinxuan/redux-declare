@@ -1,0 +1,14 @@
+{
+  "presets": [
+    "env",
+    "es2015",
+  ],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["../src"],
+      "alias": {
+        "redux-declare": "../src/index.js",
+      }
+    }]
+  ]
+}

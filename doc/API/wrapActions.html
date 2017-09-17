@@ -1,0 +1,516 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>wrapActions · redux-declare</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="wrapReducers.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Motivation.html">
+            
+                <a href="../Motivation.html">
+            
+                    
+                    Motivation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Methods
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="wrapReducers.html">
+            
+                <a href="wrapReducers.html">
+            
+                    
+                    wrapReducers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.2" data-path="wrapActions.html">
+            
+                <a href="wrapActions.html">
+            
+                    
+                    wrapActions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >wrapActions</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="api-reference-for-wrapactions">API Reference for <code>wrapActions</code></h1>
+<ul>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="wrapReducers.html">wrapReducers</a></li>
+<li><a href="#wrapActions">wrapActions</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="wrapactions">wrapActions</h3>
+<pre class="language-"><code class="lang-js"><span class="token function">wrapActions</span><span class="token punctuation">(</span>
+  nestedReducers<span class="token punctuation">,</span>
+  nestedActions <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  options <span class="token operator">=</span> defaultOptions
+<span class="token punctuation">)</span>
+</code></pre>
+<p><code>wrapActions</code> create a colloction of action creators by the <code>nestedReducers</code> and <code>nestedActions</code></p>
+<ul>
+<li><p>The <code>nestReducers</code> is an object accepted by <code>wrapReducers</code>, structured like <code>{action.type: function}</code> or <code>{action.type: {action.status: function}}</code>. </p>
+</li>
+<li><p>The <code>nestActions</code> is for users to customize and overwrite their own actionCreators, structured like <code>{action.type: function}</code> or <code>{action.type: {action.status: function}}</code>. </p>
+</li>
+</ul>
+<h3 id="wrapactionsnestedreducers">wrapActions(nestedReducers)</h3>
+<p>It automatically generates action creators by the <code>action.type</code> and <code>action.status</code> already existed in the <code>nestedReducers</code></p>
+<p>The code below</p>
+<h4 id="example">Example</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> actionCreators <span class="token operator">=</span> <span class="token function">wrapActions</span><span class="token punctuation">(</span>
+  add<span class="token punctuation">:</span> AnyFunctionYouLikeA<span class="token punctuation">;</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    success<span class="token punctuation">:</span> AnyFunctionYouLikeB<span class="token punctuation">,</span>
+    error<span class="token punctuation">:</span> AnyFunctionYouLikeC
+  <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+</code></pre>
+<p>is an equivalence to </p>
+<pre class="language-"><code class="lang-js">actionCreators <span class="token operator">=</span> <span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> <span class="token punctuation">(</span>payload<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token operator">...</span>payload<span class="token punctuation">,</span> type<span class="token punctuation">:</span><span class="token string">&apos;add&apos;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">(</span>status<span class="token punctuation">,</span> payload<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token operator">...</span>payload<span class="token punctuation">,</span> type<span class="token punctuation">:</span><span class="token string">&apos;sub&apos;</span><span class="token punctuation">,</span> status<span class="token punctuation">:</span>status<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="wrapactionsnestedreducers-nestedactions">wrapActions(nestedReducers, nestedActions)</h3>
+<p>It would automatically generate action creators by <code>action.type</code> and <code>action.status</code> first, and try to merge it with the action creators by <code>nestedActions</code>.</p>
+<h4 id="an-example-of-async-counter">An Example of Async Counter</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> nestedReducers <span class="token operator">=</span> <span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> AnyFunctionYouLikeA<span class="token punctuation">;</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    success<span class="token punctuation">:</span> AnyFunctionYouLikeB<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">let</span> nestedActions <span class="token operator">=</span> <span class="token punctuation">{</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    pending<span class="token punctuation">:</span> payload <span class="token operator">=</span><span class="token operator">&gt;</span> dispatch <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+      <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+          <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> status<span class="token punctuation">:</span><span class="token string">&apos;success&apos;</span><span class="token punctuation">,</span> count<span class="token punctuation">:</span> payload<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">)</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span> payload<span class="token punctuation">.</span>delay<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>is an equivalence to</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> actionCreators <span class="token operator">=</span> <span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> payload <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>type<span class="token punctuation">:</span> <span class="token string">&apos;add&apos;</span><span class="token punctuation">,</span> count<span class="token punctuation">:</span> payload<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">(</span>status<span class="token punctuation">,</span> payload<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">case</span> <span class="token string">&apos;pending&apos;</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> dispatch <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+          <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+              <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span>type<span class="token punctuation">:</span><span class="token string">&apos;sub&apos;</span><span class="token punctuation">,</span> status<span class="token punctuation">:</span><span class="token string">&apos;success&apos;</span><span class="token punctuation">,</span> count<span class="token punctuation">:</span> payload<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span> payload<span class="token punctuation">.</span>delay<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">case</span> <span class="token string">&apos;success&apos;</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>type<span class="token punctuation">:</span> <span class="token string">&apos;sub&apos;</span><span class="token punctuation">,</span> status<span class="token punctuation">:</span><span class="token string">&apos;instant&apos;</span><span class="token punctuation">,</span> count<span class="token punctuation">:</span> payload<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">default</span><span class="token punctuation">:</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&apos;XXX is not a function&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Yes, you need not to rewrite <code>type</code> in the thunk function.</p>
+<h4 id="an-example-when-nestedreducers-is-absent-all-action-creators-customized-by-users">An Example when nestedReducers is absent; all action creators customized by users</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> actionCreators <span class="token operator">=</span> <span class="token function">wrapActions</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> payload <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>type<span class="token punctuation">:</span> <span class="token string">&apos;add&apos;</span><span class="token punctuation">,</span> count<span class="token punctuation">:</span> payload<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    pending<span class="token punctuation">:</span> payload <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> payload<span class="token punctuation">.</span>count<span class="token punctuation">,</span> delay<span class="token punctuation">:</span> payload<span class="token punctuation">.</span>delay<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    instant<span class="token punctuation">:</span> payload <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> payload<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>is an equivalence to</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> actionCreators <span class="token operator">=</span> <span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> payload <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>type<span class="token punctuation">:</span> <span class="token string">&apos;add&apos;</span><span class="token punctuation">,</span> count<span class="token punctuation">:</span> payload<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">(</span>status<span class="token punctuation">,</span> payload<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">case</span> <span class="token string">&apos;pending&apos;</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>type<span class="token punctuation">:</span> <span class="token string">&apos;sub&apos;</span><span class="token punctuation">,</span> status<span class="token punctuation">:</span><span class="token string">&apos;pending&apos;</span><span class="token punctuation">,</span> count<span class="token punctuation">:</span> payload<span class="token punctuation">.</span>count<span class="token punctuation">,</span> delay<span class="token punctuation">:</span> payload<span class="token punctuation">.</span>delay<span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">case</span> <span class="token string">&apos;instant&apos;</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>type<span class="token punctuation">:</span> <span class="token string">&apos;sub&apos;</span><span class="token punctuation">,</span> status<span class="token punctuation">:</span><span class="token string">&apos;instant&apos;</span><span class="token punctuation">,</span> count<span class="token punctuation">:</span> payload<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">default</span><span class="token punctuation">:</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&apos;XXX is not a function&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="rules-of-merging">Rules of merging</h4>
+<p>In the <code>wrapActions</code>, we would try to translate <code>nestedReducers</code> and <code>nestedActions</code> into an representation of action creators as <code>{type: {status:actionCreator}}</code> and 
+<code>{type: actionCreators}</code>(when <code>status</code> is absent).  For any <code>type</code> existed in <code>nestedReducers</code> or in <code>nestedActions</code>, </p>
+<ol>
+<li>If <code>nestedAction[type]</code> is object (with status), and <code>nestedReducers[type]</code> is undefined or not an object, then the action creator is overwritten by <code>nestedActions</code>.</li>
+<li>If <code>nestedAction[type]</code> is absent, action creators are overwritten by <code>nestedReducers</code>.</li>
+<li>If <code>nestedAction[type]</code> is a function instead of an object, action creators are overwritten by <code>nestedAction[type]</code> </li>
+<li>If <code>nestedAction[type]</code> is valid, <code>nestedReducers[type]</code> is a function, action creators are overwritten by <code>nestedActions[type]</code></li>
+</ol>
+<p>Simply speaking, the merge happens only when both <code>nestedAction[type]</code> and <code>nestedReducers[type]</code> are valid objects.  Otherwise, the action creator is determined by 
+<code>nestedActions[type]</code> if valid, and if <code>nestedActions[type]</code> is undefined, then it is determined by <code>nestedAction[type]</code>.</p>
+<h5 id="example-of-merge-type-exist-in-either-of-nestedreducers-and-nestedactions-but-not-in-the-other">Example of Merge: type exist in either of nestedReducers and nestedActions, but not in the other</h5>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> nestedReducers <span class="token operator">=</span> <span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> AnyFunction1<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> nestedActions <span class="token operator">=</span> <span class="token punctuation">{</span>
+  sub<span class="token punctuation">:</span> YourFunctionOfSub<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">let</span> actionCreators <span class="token operator">=</span> <span class="token function">wrapActions</span><span class="token punctuation">(</span>nestedReducers<span class="token punctuation">,</span> nestedActions<span class="token punctuation">)</span>
+</code></pre>
+<p>is an equivalence to</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> actionCreators <span class="token operator">=</span> <span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> <span class="token punctuation">(</span>payload<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token operator">...</span>payload<span class="token punctuation">,</span> type<span class="token punctuation">:</span><span class="token string">&apos;add&apos;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> YourFunctionOfSub
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="example-of-merge-type-exist-in-both-nestedreducers-and-nestedactions">Example of Merge: type exist in both nestedReducers and nestedActions;</h5>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> nestedReducers <span class="token operator">=</span> <span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> AnyFunction1<span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    success<span class="token punctuation">:</span> AnyFunction2<span class="token punctuation">,</span>
+    error<span class="token punctuation">:</span> AnyFunction3<span class="token punctuation">,</span>
+    instant<span class="token punctuation">:</span> AnyFunction4<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> nestedActions <span class="token operator">=</span> <span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> YourFunctionOfAdd<span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    pending<span class="token punctuation">:</span>YourFunctionOfPending<span class="token punctuation">,</span>
+    instant<span class="token punctuation">:</span>YourFunctionOfInstant
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">let</span> actionCreators <span class="token operator">=</span> <span class="token function">wrapActions</span><span class="token punctuation">(</span>nestedReducers<span class="token punctuation">,</span> nestedActions<span class="token punctuation">)</span>
+</code></pre>
+<p>is an equivalence to</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> actionCreators <span class="token operator">=</span> <span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> YourFunctionOfAdd<span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">(</span>status<span class="token punctuation">,</span> payload<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">case</span> <span class="token string">&apos;pending&apos;</span><span class="token punctuation">:</span> 
+        <span class="token keyword">return</span> <span class="token function">YourFunctionOfPending</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">case</span> <span class="token string">&apos;instant&apos;</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token function">YourFunctionOfInstant</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">case</span> <span class="token string">&apos;success&apos;</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token operator">...</span>payload<span class="token punctuation">,</span> type<span class="token punctuation">:</span><span class="token string">&apos;sub&apos;</span><span class="token punctuation">,</span> status<span class="token punctuation">:</span> <span class="token string">&apos;success&apos;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">case</span> <span class="token string">&apos;error&apos;</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token operator">...</span>payload<span class="token punctuation">,</span> type<span class="token punctuation">:</span><span class="token string">&apos;sub&apos;</span><span class="token punctuation">,</span> status<span class="token punctuation">:</span> <span class="token string">&apos;error&apos;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">default</span><span class="token punctuation">:</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&apos;XXX is not a function&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="example-of-merge-add-user-customized">Example of Merge: add user customized</h5>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> nestedReducers <span class="token operator">=</span> <span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> AnyFunction1<span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> nestedActions <span class="token operator">=</span> <span class="token punctuation">{</span>
+  add2<span class="token punctuation">:</span> YourFunctionOfAdd2<span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    pending<span class="token punctuation">:</span>YourFunctionOfPending<span class="token punctuation">,</span>
+    instant<span class="token punctuation">:</span>YourFunctionOfInstant
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  poi<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    pending<span class="token punctuation">:</span> YourFunctionOfPOI
+       <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">let</span> actionCreators <span class="token operator">=</span> <span class="token function">wrapActions</span><span class="token punctuation">(</span>nestedReducers<span class="token punctuation">,</span> nestedActions<span class="token punctuation">)</span>
+</code></pre>
+<p>is an equivalence to</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">let</span> actionCreators <span class="token operator">=</span> <span class="token punctuation">{</span>
+  add<span class="token punctuation">:</span> <span class="token punctuation">(</span>payload<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token operator">...</span>payload<span class="token punctuation">,</span> type<span class="token punctuation">:</span><span class="token string">&apos;add&apos;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  add2<span class="token punctuation">:</span> YourFunctionOfAdd2<span class="token punctuation">,</span>
+  sub<span class="token punctuation">:</span> <span class="token punctuation">(</span>status<span class="token punctuation">,</span> payload<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">case</span> <span class="token string">&apos;pending&apos;</span><span class="token punctuation">:</span> 
+        <span class="token keyword">return</span> <span class="token function">YourFunctionOfPending</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">case</span> <span class="token string">&apos;instant&apos;</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token function">YourFunctionOfInstant</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">default</span><span class="token punctuation">:</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&apos;XXX is not a function&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  poi<span class="token punctuation">:</span> <span class="token punctuation">(</span>status<span class="token punctuation">,</span> payload<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">case</span> <span class="token string">&apos;pending&apos;</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token function">YourFunctionOfPOI</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">default</span><span class="token punctuation">:</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&apos;XXX is not a function&apos;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="on-the-plan-not-yet-availale">On the Plan, not yet availale:</h3>
+<ul>
+<li>[X] compose dispatch to avoid retype <code>{type:type}</code> in user customizing.</li>
+<li>[ ] option to enable FSA</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="wrapReducers.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: wrapReducers">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"wrapActions","level":"1.3.2","depth":2,"previous":{"title":"wrapReducers","level":"1.3.1","depth":2,"path":"doc/API/wrapReducers.md","ref":"doc/API/wrapReducers.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","github","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/zhujinxuan/redux-declare"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"prism":{},"anchorjs":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"Summary.md"},"variables":{},"title":"redux-declare","gitbook":">= 3.0.0"},"file":{"path":"doc/API/wrapActions.md","mtime":"2017-09-17T05:22:15.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-09-17T05:25:40.238Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
