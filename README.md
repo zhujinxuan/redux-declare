@@ -7,6 +7,7 @@ This package `redux-declare` allows you to create Actions and Reducers with obje
 
 1.  Promise-like Async Actions: Dispatch Async Actions with Status Change.
 2.  Declarative Reducers and Actions: As easy as Redux-act/Redux-actions for Synchronic operations.
+3.  Neater thunk code: Do not need to rewrite `type` and `status` in thunk code.
 
 # Install 
 
@@ -95,12 +96,11 @@ let nestedActions = {
       // status; otherwise, async dispatch sub action with error status.
         if (!getState().paused) {
           dispatch({
-            type: "sub",
             status: "success",
             count: payload.count
           });
         } else {
-          dispatch({ type: "sub", status: "error" });
+          dispatch({ status: "error" });
         }
       }, payload.delay);
     }
@@ -147,12 +147,19 @@ setTimeout(() => {
 }, 100);
 ```
 
+# FAQ:
+ * Do I need to rewrite `type` or `status` when customizing action creators?
 
-Maybe In the Plan:
-==================
+   No.  As long as you are trying to dispatching the `type` and `status` by
+   the node indexed by the same `type` and `status`, you need not to retype 
+   the `type` and `status`.  Even you are dispatch action in thunk, it is 
+   not necessary to rewrite the `type` and `status`.  
+   Details could be seen in `src/composeAutoFix.js`.
+
+# Maybe In the Plan:
 
 -   [ ] Webpack bundle compile
--   [ ] Compose Dispatch for avoid retype action.type
+-   [X] Compose Dispatch for avoid retype action.type
 -   [ ] Support FSA by appending rules
 -   [ ] `BindAll` like in the \`redux-act\`
 

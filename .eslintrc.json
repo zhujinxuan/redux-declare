@@ -57,7 +57,7 @@
     "react/react-in-jsx-scope": "error",
     "react/jsx-uses-vars": [2],
     "react/jsx-uses-react": [2],
-    "import/no-unresolved": [2, {"commonjs": true, "amd": true}],
+    "import/no-unresolved": [2, {"commonjs": true, "amd": true, "ignore": ["redux-declare"]}],
     "import/namespace": 2,
     "import/default": 2,
     "import/export": 2,
@@ -76,7 +76,7 @@
         "config": "webpack.config.js"
       }
     },
-    "import/ignore": ["redux\-declare"]
+    "import/ignore": ["node_modules"]
   },
   "globals": {
     "require": true

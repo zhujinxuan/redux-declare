@@ -1,5 +1,5 @@
-"use strict";
 import preCheck from "./preCheck.js";
+import composeAutoFix from "./composeAutoFix.js";
 
 let defaultOptions = { statusKey: "status" };
 
@@ -71,9 +71,15 @@ function translateNestActions(nestActions) {
   for (const typeKey of Object.keys(nestActions)) {
     if (typeof nestActions[typeKey] === "object") {
       let nestedElem = Object.assign({}, nestActions[typeKey]);
-      result[typeKey] = (status, payload) => nestedElem[status](payload);
+      result[typeKey] = (status, payload) => {
+        let prefix = { status: status, type: typeKey, thunk: true };
+        return composeAutoFix(prefix, nestedElem[status])(payload);
+      };
+      // result[typeKey] = (status, payload) =>  nestedElem[status](payload);
     } else if (typeof nestActions[typeKey] === "function") {
-      result[typeKey] = nestActions[typeKey];
+      let prefix = { type: typeKey };
+      result[typeKey] = composeAutoFix(prefix, nestActions[typeKey]);
+      // result[typeKey] = nestActions[typeKey]
     } else {
       result[typeKey] = () => undefined;
     }

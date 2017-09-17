@@ -1,5 +1,5 @@
 "use strict";
-import assert from "assert";
+import assert from "better-assert";
 import { wrapReducers, wrapActions } from "../src/index.js";
 
 let counter = { count: 1 };
@@ -91,19 +91,9 @@ describe("Examine wrapActions(reducers, actions)", () => {
     add2: () => ({
       type: "add"
     }),
-    add: payload => ({
-      type: "add",
-      count: 100 + payload.count
-    }),
+    add: payload => ({ count: 100 + payload.count }),
     sub: {
-      pending: payload =>
-        Object.assign(
-          {
-            type: "sub",
-            status: "success"
-          },
-          payload
-        )
+      pending: payload => Object.assign({ status: "success" }, payload)
     }
   };
   let actionCreators = {};
@@ -134,5 +124,42 @@ describe("Examine wrapActions(reducers, actions)", () => {
     assert(action.status === "success");
     assert(action.type === "sub");
     assert(shallEqual(action, payload));
+  });
+});
+
+describe("Examine wrapActions(reducers, thunk)", () => {
+  let nestedAction = {
+    sub: {
+      pending: payload => dispatch =>
+        dispatch({
+          status: "success",
+          count: payload.count + 5
+        }),
+      success: payload => dispatch =>
+        dispatch({
+          count: payload.count + 10
+        })
+    }
+  };
+  let actionCreators = {};
+  it("Built Actions", () => {
+    actionCreators = wrapActions(nestedReducers, nestedAction);
+    assert(typeof actionCreators === "object", "Success");
+  });
+  it("Test Thunk with type passing", () => {
+    let dispatch = action => Object.assign({ wrapped: true }, action);
+    let action = actionCreators.sub("pending", { count: 1 })(dispatch);
+    assert(action.count === 6, `${action.count}`);
+    assert(action.type === "sub", `${action.type}`);
+    assert(action.status === "success");
+    assert(action.wrapped === true);
+  });
+  it("Test Thunk with Status passing", () => {
+    let dispatch = action => Object.assign({ wrapped: "cute" }, action);
+    let action = actionCreators.sub("success", { count: 1 })(dispatch);
+    assert(action.count === 11, `${action.count}`);
+    assert(action.type === "sub", `${action.type}`);
+    assert(action.status === "success");
+    assert(action.wrapped === "cute");
   });
 });

@@ -57,7 +57,7 @@ let nestedActions = {
   sub: {
     pending: payload => dispatch => {
       setTimeout(() => {
-          dispatch({type:'sub', status:'success', count: payload.count})
+          dispatch({ status:'success', count: payload.count})
           }, payload.delay)
     }
   }
@@ -85,14 +85,15 @@ let actionCreators = {
   }
 }
 ```
+Yes, you need not to rewrite `type` in the thunk function.
 
 #### An Example when nestedReducers is absent; all action creators customized by users
 ```js
 let actionCreators = wrapActions({}, {
   add: payload => {type: 'add', count: payload.count},
   sub: {
-    pending: payload => {type: 'sub', status:'pending', count: payload.count, delay: payload.delay},
-    instant: payload => {type: 'sub', status:'instant', count: payload.count},
+    pending: payload => { count: payload.count, delay: payload.delay},
+    instant: payload => { count: payload.count},
   }
   })
 ```
@@ -242,5 +243,5 @@ let actionCreators = {
 ```
 
 ### On the Plan, not yet availale:
-- [ ] compose dispatch to avoid retype `{type:type}` in user customizing.
+- [X] compose dispatch to avoid retype `{type:type}` in user customizing.
 - [ ] option to enable FSA

@@ -27,12 +27,11 @@ let nestedActions = {
       setTimeout(() => {
         if (!getState().paused) {
           dispatch({
-            type: "sub",
             status: "success",
             count: payload.count
           });
         } else {
-          dispatch({ type: "sub", status: "error" });
+          dispatch({ status: "error" });
         }
       }, payload.delay);
     }
@@ -71,4 +70,3 @@ setTimeout(() => {
     assert(store.getState().count === -8.99);
   }, 100);
 }, 100);
-
