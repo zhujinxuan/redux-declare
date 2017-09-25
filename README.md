@@ -1,4 +1,5 @@
 # Write More Organizable Actions and Reducers with Less Code
+![](logo/logo.svg)
 
 This package `redux-declare` allows you to create Actions and Reducers with objects like
 `{type: function}` and `{type: {status: function}}`.

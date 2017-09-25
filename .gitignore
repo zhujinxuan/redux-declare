@@ -3,3 +3,5 @@ lib
 coverage
 dist
 _book
+log
+aux
