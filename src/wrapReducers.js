@@ -29,12 +29,19 @@ function wrapReducers(nestReducers, options = {}) {
     if (flattenReducers[action.type]) {
       let nextState = flattenReducers[action.type](prevState, action);
       return options.autoFixState
-        ? Object.assign({}, prevState, nextState)
+        ? autoFixState(prevState, nextState)
         : nextState;
     }
     // for combineReducers
     return prevState;
   };
+}
+
+function autoFixState(prevState, nextState) {
+  if (Object.keys(nextState).length === 0) {
+    return prevState;
+  }
+  return Object.assign({}, prevState, nextState);
 }
 
 function flatten(elem, options) {
