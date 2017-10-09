@@ -1,5 +1,5 @@
 import preCheck from "./preCheck.js";
-import composeAutoFix from "./composeAutoFix.js";
+// import composeAutoFix from "./composeAutoFix.js";
 
 let defaultOptions = { statusKey: "status" };
 
